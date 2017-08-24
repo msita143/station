@@ -1,0 +1,170 @@
+<app-header></app-header>
+<div class="container-fluid">
+	<div class="row">
+		<div class="row requestheader" >
+			<div class="col-md-10">		
+				<h2 class="centered text-center requesttext">Request Dashboard</h2>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-primary float-right" type="submit" (click)="createRequest()">Create New Request</button>
+			</div>
+		</div>
+		<div class="search">
+			<label>Search Criteria:</label>
+			<form name="form" (ngSubmit)="f.form.valid && login(f.value)" #f="ngForm" novalidate>
+				<div class="searchContainer">
+					<div class="searchbox1">
+						<div class="searchdivbox1">
+							<div class="divbox">
+								<label>Search by id :</label>
+							</div>
+							<div class="divbox">
+				                <input type="text" class="form-control" ngModel
+				                       name="search" required placeholder="Enter text">
+							</div>
+						</div>
+						<div class="searchbuttonbox">
+	        				<button class="btn btn-primary" type="submit" id="saerch">Search</button>
+	        			</div>
+					</div>
+					<div class="searchbox2">
+						<div class="searchdivbox2">
+							 <div class="form-group row">
+							 	<div class="labelbox1">
+				            		<label>Area : </label>   
+				            	</div>                  
+              	                <select class="form-control"  value="{{codeshortname}}"   >
+			                    	<option *ngFor="let area of areaList" [value]="area.codeshortname">
+										{{area.codeshortname}}
+									</option>
+			                     </select>                   
+			                     <div class="labelbox2">
+				            		<label class="lmargin30">Requested Type : </label>  
+				            	</div>            				          		
+				        		<select class="form-control"  value="{{requestTypeCode}}"   >
+			                      		<option *ngFor="let requestType of requestTypeList" [value]="requestType.codeshortname">
+										{{requestType.codeshortname}}
+									</option>
+			                    </select> 		            	
+				         	</div>
+				         	<div class="form-group row">
+				         		<div class="labelbox1">
+				            		<label>Status : </label>   
+				            	</div>                  
+              	                <select class="form-control"  value="All"   >
+			                    	<option *ngFor="let status of statusList" [value]="status">
+										{{status}}
+									</option>
+			                     </select>      
+			                     <div class="labelbox2">
+				            		<label>Requester : </label>   
+				            	</div>                       
+				        		<select class="form-control"  >
+			                      		<option *ngFor="let requester of requesterList" [value]="requester.displayname">
+										{{requester.displayname}}
+									</option>
+			                    </select>                               
+				            	
+				         	</div>
+				         	<div class="form-group row">
+				         		<div class="labelbox1">
+				            		<label>Station/Location : </label>   
+				            	</div>                  
+              	                <select class="form-control"  value="{{stationCode}}"   >
+			                    	<option *ngFor="let station of stationList" [value]="station.code">
+										{{station.code}}
+									</option>
+			                     </select>  
+			                     <div class="labelbox2">
+				            		<label>SubmittedBy : </label>   
+				            	</div>                          
+				        		<select class="form-control"  value="submittedCode"   >
+			                      	<option *ngFor="let submittedBy of submittedByList" [value]="submittedBy.codeshortname">
+										{{requestType.codeshortname}}
+									</option>
+			                    </select>                               
+				         	</div>
+						</div>
+					</div>
+					<div class="searchbox3">
+						<div class="searchdivbox2">
+							<div class="form-group row">
+				         		<div class="labelbox1">
+				            		<label>From Date : </label>   
+				            	</div>                  
+              	                <div class="cal-group">
+								    <div class="input-group">
+								      <input class="form-control" placeholder="yyyy-mm-dd" name="edp" (ngModelChange)="endDatechange($event)"
+								             [(ngModel)]="edp" ngbDatepicker #de="ngbDatepicker">
+								      <div class="input-group-addon" (click)="de.toggle()" >
+								        <img src="./app/images/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+								      </div>					      
+								    </div>
+								</div>     
+			                </div>
+			                <div class="form-group row">
+			                     <div class="labelbox1">
+				            		<label>To Date : </label>   
+				            	</div>                          
+				        		<div class="cal-group">
+								    <div class="input-group">
+								      <input class="form-control" placeholder="yyyy-mm-dd" name="edp" (ngModelChange)="endDatechange($event)"
+								             [(ngModel)]="edp" ngbDatepicker #de="ngbDatepicker">
+								      <div class="input-group-addon" (click)="de.toggle()" >
+								        <img src="./app/images/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+								      </div>					      
+								    </div>
+								</div>                               
+				         	</div>
+				         	<div class="searchbuttonbox">
+	        					<button class="btn btn-primary" type="submit">Search</button>
+	        				</div>
+						</div>
+					</div>
+				</div>  
+			</form>      
+         </div>
+		<div class="table-responsive requesttable">    
+			<div class="tableheader">
+				<div class="startdiv"><h3>List of current requests:</h3></div>  
+				<div class="enddiv">
+					<button class="btn btn-primary" type="submit" [disabled]="isStatusRevw" (click)="createSwtichOrder()">Create Switch Order</button>
+					<div style="width:1%;"></div>
+					<button class="btn btn-primary" type="submit" disabled (click)="createPermit">Create Permit</button>
+				</div>
+			</div>   
+	  		<table class="table table-bordered">
+	    		<thead>
+	      			<tr >
+	        			<th>Code</th>
+	        			<th>Status</th>
+	        			<th>Type</th>
+	        			<th>Category</th>
+	        			<th>Requestor</th>
+	        			<th>Location</th>
+	        			<th>RC1</th>
+	        			<th>Creater</th>
+	        		</tr>
+	        	</thead>
+	        	<tbody>
+	        		<tr *ngFor="let request of requestList" [ngSwitch]="request.status" (click)=statusCheck($event,request.status,request.requestid,request.rc1StationId)
+	        		    [class.highlight]="request.requestid == selectedRequestId">
+	        			<td>{{request.requestcode}}</td>
+        				<td *ngSwitchCase="'REVW'" class="tdAprovNotPicked" > {{request.status}} </td>
+        				<td *ngSwitchCase="'New'" class="tdNew" >{{request.status}}</td>
+        				<td *ngSwitchCase="'CNCL'" class="tdCnclDapv" > {{request.status}} </td>
+        				<td *ngSwitchCase="'APPV'" class="tdApprove" >{{request.status}}</td>	        			
+        				<td *ngSwitchDefault>{{request.status}}</td>
+
+	        			<td>{{request.requesttype}}</td>
+	        			<td>{{request.category}}</td>
+	        			<td>{{request.requestor}}</td>
+	        			<td>{{request.location}}</td>
+	        			<td>{{request.rc1}}</td>
+	        			<td>{{request.creater}}</td>
+	        		</tr>
+	        	</tbody>
+	        </table>
+		</div>
+	</div>
+</div>

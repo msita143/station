@@ -1,0 +1,296 @@
+<app-header></app-header>
+<form name="form" (ngSubmit)="t.form.valid && saveRequest(t,t.value)" #t="ngForm" layout="row">
+	<div class="container-fluid">
+		<div class="row requestheader" >
+			<div class="col-md-10 ">		
+				<h2 class="text-center requestheadertext">Create Request</h2>
+			</div>				
+		</div>
+		<div class="col-md-12">
+			<div class="request">
+	             <div class="form-group row">
+	             	<label>Request Code : </label>
+	               	<div class="col-md-3">	               	   
+	                   <input type="text" class="form-control" id="reqCode" ngModel disabled
+	                          name="reqCode" placeholder="Code will be generated">	                            
+	            	</div>           		       
+	            	<label>Request Category : </label>                     
+                    <div class="col-md-3">		               	   
+	                   <select class="form-control" [(ngModel)]="requestCategoryCode" value="{{requestCategoryCode}}" name="reqCategory">
+                      		<option *ngFor="let requestCategory of requestCategoryList" [value]="requestCategory.codeshortname">
+									{{requestCategory.codeshortname}}
+								</option>
+                       </select>
+	            	</div> 
+	          		<label>Requested Type : </label>
+	            	<div class="col-md-3">
+	                   <select class="form-control"  [(ngModel)]="requestTypeCode"  value="{{requestTypeCode}}"  name="requestType">
+                      		<option *ngFor="let requestType of requestTypeList" [value]="requestType.codeshortname">
+									{{requestType.codeshortname}}
+								</option>
+                       	</select>                               
+	            	</div> 
+	         	</div>   
+	    	</div>
+		</div>
+		<div class="row col-md-12">
+			<div class="col-md-6 lreqborder">
+				<label><h4>Enter Equipment detail:</h4></label>
+		      	<div class="form-group row">	             	       
+	            	<label for="station" class="col-sm-2">Station :</label>              
+                    <div class="col-md-4">		               	   
+	                   	<select class="form-control" [(ngModel)]="stationCode" value="{{stationCode}}" name="station" (change)="stationChanged($event.target.value)">
+                      		<option *ngFor="let station of stationList" [value]="station.code">{{station.code}}</option>
+                       	</select>                            
+	            	</div> 
+	            	<label for="wrklocation" class="col-sm-2">Work Location : </label>
+	            	<div class="col-sm-4">
+	                   <input type="text" class="form-control" id="wrklocation"  required  [(ngModel)]="wrkLocation"
+	                          name="wrkLocation" placeholder="Enter work location">	                            
+	            	</div> 
+	         	</div>
+	         	<div class="form-group row">
+                      <label for="equipType" class="col-sm-2">Equipment Type :</label>
+                      <div class="col-sm-5">
+                          <select class="form-control" name="equipType" (change)="equipTypeChanged($event.target.value)" value="{{equipmentType}}">
+                         <option *ngFor="let equipType of equipmentTypeList" [value]="equipType.equipmentType">{{equipType.equipmentType}}</option>
+                       </select> 
+                      </div>
+                   </div>
+                   <div class="form-group row">                      
+                   	<label for="equip" class="col-sm-2">Equipment :</label>
+                      	<div class="col-sm-5">
+                      		<select multiple class="form-control" name="equip" (change)="equipSelected($event.target.options)" required>
+                       		<option *ngFor="let equip of equipmentList" [value]="equip.code">{{equip.code}}</option>
+                        </select> 
+                		</div>
+                 </div>
+		         <div class="table-responsive loggingtable">    
+					<span><h3>List of current Equipment:</h3></span>      
+			  		<table class="table table-bordered" >
+			    		<thead>
+			      			<tr >
+			        			<th>Station</th>
+			        			<th>Equipment</th>
+			        			<th>Equipment type</th>
+			        			<th>Location</th>
+			        			<th>Low voltage</th>
+			        			<th>High voltage</th>
+			        		</tr>
+			        	</thead>
+			        	<tbody>
+			        		<tr *ngFor="let equip of selectedEquipmentList">
+			        			<td>{{stationCode}}</td>
+			        			<td>{{equip.code}}</td>
+			        			<td>{{equipmentType}}</td>
+			        			<td>{{equip.address}}</td>
+			        			<td>{{equip.lowVoltage}}</td>
+			        			<td>{{equip.highVoltage}}</td>
+			        		</tr>
+			        	</tbody>
+			        </table>	        
+				</div>
+			</div>
+			<div class="col-md-6 rreqborder">
+			    <label><h4>Enter work detail:</h4></label>
+				<div class="form-group row">	           			           
+            		<label for="wrkreason" class="col-sm-1">Reason for work:</label>
+					<textarea class="col-sm-4" rows="3" id="wrkreason" name="wrkReason"></textarea>
+					<div class="col-sm-4 rushalign">  		
+						<div class="form-check">
+							<label class="form-check-label">
+							    <input #rush class="form-check-input" type="checkbox" value="" [(ngModel)]="rushRequest" name="rushRequest" >
+							    Rush Request
+							</label>
+					</div>
+					<div class="col-sm-12">          
+						<textarea class="form-control" rows="3" [required]="rushRequest" [(ngModel)]="rushReason"  name="rushReason" placeholder="Enter reason of rush"></textarea>
+					</div>
+					</div>
+					<div class="radio col-md-2">
+					    <label>Select Department</label>
+				  		<label><input type="radio" name="selectedDept" [(ngModel)]="selectedDept" value="0">Transmission</label>
+				  		<label><input type="radio" name="selectedDept" [(ngModel)]="selectedDept" value="1">Substation</label>
+					</div>
+				</div>
+		   		<div class="form-group row">	
+	         		<div class="col-sm-6 row">
+		         		<label class="col-sm-1 labeldatealign">Start time:</label>
+						<div class="form-group col-sm-5">
+						    <div class="input-group datealign">
+						      <input class="form-control" placeholder="yyyy-mm-dd" required (ngModelChange)="startDatechange($event)"
+						             name="sdp" [(ngModel)]="sdp" ngbDatepicker #ds="ngbDatepicker">
+						      <div class="input-group-addon" (click)="ds.toggle()" >
+						        <img src="./app/images/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+						      </div>					      
+						    </div>
+						</div>
+						<div class="form-group col-sm-5">
+						      <ngb-timepicker [(ngModel)]="stime" name="stime"></ngb-timepicker>					      					      
+						</div>
+					</div>
+					<div >
+					</div>
+					<div class="col-sm-6 row">
+		         	    <label class=" col-sm-1 labeldatealign">End time:</label>	
+						<div class="form-group col-sm-5">
+						    <div class="input-group datealign">
+						      <input class="form-control" placeholder="yyyy-mm-dd" name="edp" (ngModelChange)="endDatechange($event)"
+						             [(ngModel)]="edp" ngbDatepicker #de="ngbDatepicker">
+						      <div class="input-group-addon" (click)="de.toggle()" >
+						        <img src="./app/images/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+						      </div>					      
+						    </div>
+						</div>
+						<div class="form-group col-sm-5">
+						    <!-- ngb-timepicker [(ngModel)]="time" [seconds]="seconds" name="time"></ngb-timepicker-->		
+							<ngb-timepicker [(ngModel)]="etime" name="etime"></ngb-timepicker>					      					      
+						</div>
+					</div>
+	        	</div> 
+				<div class="form-group row">
+	         		<label class="labeldatealign">Cleanup Time :</label>
+					<div class="form-group col-sm-3">
+					      <ngb-timepicker [(ngModel)]="ctime" name="ctime" minuteStep="15"></ngb-timepicker>					      					      
+					</div>
+				</div>		         					
+				<div class="form-group  row">
+	         		<div class="checkbox detailcheckbox">
+					  <label>
+					    <input type="checkbox" value="" [(ngModel)]="switchOnly" name="switchOnly" >
+					    Switching Only
+					  </label>
+					</div>
+					<div class="checkbox detailcheckbox">
+						<label>
+						    <input type="checkbox" value=""  [(ngModel)]="testClearance"  name="testClearance" >
+						    Test Clearance
+						</label>
+					</div>
+					<div class="checkbox detailcheckbox">
+						<label>
+						    <input type="checkbox" value=""  [(ngModel)]="groundSwitchNeeded"  name="groundSwitchNeeded">
+						    Ground Switch Needed
+						</label>
+					</div>
+					<div class="checkbox detailcheckbox">
+						<label>
+						    <input type="checkbox" value=""  [(ngModel)]="groundSwitchNeeded"  name="commonEquipmant">
+						    Common Equipment
+						</label>
+					</div>
+					<div class="checkbox detailcheckbox">
+						<label>
+						    <input type="checkbox" value=""  [(ngModel)]="constructionClearance" name="constructionClearance">
+						    Construction Clearance
+						</label>
+					</div>
+					<div class="checkbox detailcheckbox">
+						<label>
+						    <input type="checkbox" value=""  [(ngModel)]="jurisdictionClearance" name="jurisdictionClearance">
+						    Jurisdiction Clearance
+						</label>
+					</div>
+					<div class="checkbox detailcheckbox">
+						<label>
+						    <input type="checkbox" value=""  [(ngModel)]="boundaryClearance" name="boundaryClearance">
+						    Boundary Clearance
+						</label>
+					</div>
+					<div class="checkbox detailcheckbox">
+						<label>
+						    <input type="checkbox" value=""  [(ngModel)]="permitNeeded" name="permitNeeded">
+						    Permit Needed
+						</label>
+					</div>
+					<div class="checkbox detailcheckbox">
+						<label>
+						    <input type="checkbox" value=""  [(ngModel)]="requestOnly" name="requestOnly">
+						    Request Only
+						</label>
+					</div>
+					<div class="checkbox detailcheckbox">
+						<label>
+						    <input type="checkbox" value=""  [(ngModel)]="outageScheduleMasterOpf" name="outageScheduleMasterOpf">
+						    Outage Schedule Master Opf
+						</label>
+					</div>
+					<div class="checkbox detailcheckbox">
+						<label>
+						    <input type="checkbox" value=""  [(ngModel)]="referenceDrawingInt" name="referenceDrawingInt">
+						    Reference Drawing
+						</label>
+					</div>
+	   			</div>
+	   			<hr/>
+		    	<div class="row">
+		         	<div class="col-md-10">
+		         	</div>
+		         	<div class="col-md-2">			
+						<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addHolderModal">Select Holder</button>
+                       	<div class="modal fade" id="addHolderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+						    	<div class="modal-content">
+						      		<div class="modal-header">
+						        		<h5 class="modal-title" id="exampleModalLabel">Add Holder</h5>
+						        			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          				<span aria-hidden="true">&times;</span>
+						        			</button>
+						      		</div>
+						      		<div class="modal-body">
+										<div class="container-fluid">
+											<div class="row col-md-12">									 
+												<label for="station" class="form-control-label">Select holder(s):</label>
+												<select multiple class="form-control" name="holder" (change)="holderSelected($event.target.options)">
+					                       			<option *ngFor="let holder of holderList" [value]="holder.id">{{holder.firstname}} {{holder.lastname}}</option>
+					                        	</select>									  
+											</div>
+										</div>	
+						      		</div>
+						      		<div class="modal-footer">
+						   				<button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+						      		</div>
+						    	</div>
+						  	</div>
+						</div>
+					</div>						
+				</div>
+				<div class="table-responsive loggingtable">    
+					<span><h3>List of selected holder:</h3></span>      
+			  		<table class="table table-bordered">
+			    		<thead>
+			      			<tr >
+			        			<th>First Name</th>
+			        			<th>Last Name</th>
+			        			<th>Username</th>
+			        			<th>Company</th>
+			        			<th>Email</th>
+			        			<th>Role</th>
+			        		</tr>
+			        	</thead>
+			        	<tbody >
+			        		<tr *ngFor="let holder of selectedHolderList" >
+			        			<td>{{holder.firstname}}</td>
+			        			<td>{{holder.lastname}}</td>
+			        			<td>{{holder.username}}</td>
+			        			<td>{{holder.company}}</td>
+			        			<td>{{holder.emailaddress}}</td>
+			        			<td>{{holder.role}}</td>
+			        			<td><i class="icon-trash"></i></td>
+			        		</tr>
+			        	</tbody>
+			        </table>	        
+				</div>						
+			</div>
+		</div>		
+	</div>
+	<div class="col-md-12 row buttonsavecancel">
+		<div class="col-md-11 ">
+			<button class="btn" type="submit" (click)="cancel()">Cancel</button>
+			<button class="btn" type="submit" id="print">Print</button>
+		</div>
+		<div class="col-md-1">
+			<button class="btn btn-primary float-right" type="submit" id="save">Save</button>
+		</div>
+	</div>
+</form>	

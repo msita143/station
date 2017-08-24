@@ -1,0 +1,159 @@
+<app-header></app-header>
+<form name="form" (ngSubmit)="t.form.valid && saveSwitchOrder(t,t.value)" #t="ngForm" layout="row">
+	<div class="container-fluid"  >
+		<div class="row soheader" >
+			<div class="col-md-10 ">		
+				<h2 class="text-center soheadertext">Create Swtich Order</h2>
+			</div>
+		</div>
+		<div class="col-md-10" class="sodiv1"  *ngFor="let request of requests">
+             <div class="form-group row " >
+             	<label class="labelbox2">Request Code : </label>
+               	<div class="sotextdiv">	               	   
+                   <span>{{request.requestcode}}</span>	                            
+            	</div>
+            	<label class="labelbox1">Requester : </label>
+               	<div class="sotextdiv" >	               	   
+                   <span>{{request.requestor}}</span>		                            
+            	</div> 
+            	<label class="labelbox1">Status : </label>
+               	<div class="sotextdiv" >	               	   
+                   <span>{{request.status}}</span>                           
+            	</div> 
+            	<label class="labelbox1">Created By : </label>
+               	<div class="sotextdiv" >	               	   
+                   <span>{{request.createdby}}</span>	                            
+            	</div> 
+            	<label class="labelbox1">Assign To : </label>
+               	<div class="sotextdiv" >	               	   
+                   <input type="text" class="form-control" ngModel
+				          name="assignTo"  placeholder="Enter Assign to ">		                            
+            	</div>             			
+            </div>	
+            <div class="form-group row ">
+             	<label class="labelbox2">Station - Equipment : </label>
+               	<div class="sosttextdiv col-md-3">	               	   
+                   <span class="property-value"></span>	                            
+            	</div>
+             	<label class="labelbox1">Location : </label>
+               	<div  class="sotextdiv">	               	   
+                   <span class="property-value">{{request.location}}</span>		                      	                            
+            	</div>  
+            	<label class="labelbox1">Start date : </label>
+               	<div class="sotextdiv" >	               	   
+                   <span class="property-value">{{request.scheduledStartTime}}</span>	                            
+            	</div> 
+            	<label class="labelbox1">End date : </label>
+               	<div class="sotextdiv" >	               	   
+                   <span class="property-value">{{request.scheduledEndTime}}</span>		                              
+            	</div> 	
+            </div>
+		</div>
+		<div class="col-md-10" class="sodiv2">
+             <div class="form-group row ">
+             	<label class="labelbox1"> SWO Code : </label>
+               	<div class="sotextdiv">	               	   
+                   <span class="property-value">{{swoRequestCode}}</span>                            
+            	</div>
+            	<label class="labelbox1">SWO Status : </label>
+               	<div class="sotextdiv" >	               	   
+                   <span>{{swoStatus}}</span>	                            
+            	</div> 
+            	<label class="labelbox1">Needed Date : </label>
+               	<div class="cal-group">
+				    <div class="input-group">
+				      <input class="form-control" placeholder="yyyy-mm-dd" name="edp" (ngModelChange)="endDatechange($event)"
+				             [(ngModel)]="edp" ngbDatepicker #de="ngbDatepicker">
+				      <div class="input-group-addon" (click)="de.toggle()" >
+				        <img src="./app/images/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+				      </div>					      
+				    </div>
+				</div> 
+            	<label class="labelbox1">Needed Time : </label>              	   
+                <div class="form-group col-sm-4">
+					<ngb-timepicker [(ngModel)]="etime" name="etime"></ngb-timepicker>					      					      
+				</div>	                            	
+            </div>	
+            <div class="form-group row ">
+             	<label class="labelbox1">Purpose of Order : </label>
+               	<div class="sotextdivNobrg col-md-11">	               	   
+                   <input type="text" class="form-control" ngModel 
+                          name="purpose" placeholder="Enter purpose">	                            
+            	</div>
+            </div>
+            <div class="form-group row ">
+             	<label class="labelbox1">Dispatcher Swtiching Instruction : </label>
+               	<div class="sotextdivNobrg col-md-11">	               	   
+                   <textarea class="col-sm-11" rows="3" id="wrkreason" name="wrkReason"></textarea>	                            
+            	</div>
+            </div>
+            <div class="form-group row ">
+             	<label class="labelbox1">Station : </label>
+               	<div class="sotextdivNobrg col-md-2">	               	   
+                	<select class="form-control" ngModel name="station" value="{{stationCode}}">	
+                   		<option *ngFor="let station of stationList" [value]="station.id">
+							{{station.code}}
+						</option>
+                   	</select>                            
+            	</div>
+            	<label class="labelbox1">Device Type : </label>
+               	<div class="sotextdivNobrg col-md-2" >	               	   
+                   <select class="form-control" ngModel name="deviceType" value="{{equipmentTypeCode}}">	
+                   		<option *ngFor="let equpType of equipmentTypeList" [value]="equpType.equipmentType">
+							{{equpType.equipmentType}}
+						</option>
+                   	</select>	                            
+            	</div> 
+            	<label class="labelbox1">Device : </label>
+               	<div class="sotextdivNobrg col-md-2">	               	   
+                   <select class="form-control" ngModel name="device"  value="{{transEquipCode}}">	
+                   		<option *ngFor="let transEquip of transmissionEquipList" [value]=transEquip.code>
+							{{transEquip.code}}
+						</option>
+                   	</select>		                            
+            	</div> 
+            	<label class="labelbox1">Valid Action : </label>
+               	<div class="sotextdivNobrg col-md-2" >	               	   
+                   <select class="form-control" ngModel name="validaction" value="{{sostepValidAction}}">	
+                   		<option *ngFor="let validAction of soStepDefList" [value]=validAction.dispatcherStepDetails>
+							{{validAction.dispatcherStepDetails}}
+						</option>
+                   	</select>		                            
+            	</div>            			
+            </div>
+             
+		</div>
+		<div class="table-responsive ">    
+			  		<table class="table table-bordered" >
+			    		<thead>
+			      			<tr >
+			        			<th>Step#</th>
+			        			<th>Step Details</th>
+			        			<th>Device</th>
+			        			<th>Override</th>
+			        			<th></th>
+			        		</tr>
+			        	</thead>
+			        	<tbody>
+			        		<tr *ngFor="let equip of selectedEquipmentList">
+			        			<td>{{stationCode}}</td>
+			        			<td>{{equip.code}}</td>
+			        			<td>{{equipmentType}}</td>
+			        			<td>{{equip.address}}</td>
+			        			<td>{{equip.lowVoltage}}</td>
+			        			
+			        		</tr>
+			        	</tbody>
+			        </table>	        
+			</div>
+	</div>
+	<div class="col-md-12 row buttonsavecancel">
+		<div class="col-md-11 ">
+			<button class="btn" type="submit" (click)="cancel()">Cancel</button>
+			<button class="btn" type="submit" id="print">Print</button>
+		</div>
+		<div class="col-md-1">
+			<button class="btn btn-primary float-right" type="submit">Save</button>
+		</div>
+	</div>
+</form>

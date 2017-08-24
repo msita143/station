@@ -1,0 +1,35 @@
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" [routerLink]="['/logging']"><img alt="" src="favicon.ico"></a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">        
+        <!--li class="nav-item">
+          <a href="#" class="dropdown-toggle" role="button">Create <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a class="nav-item nav-link" href="">Request</a></li>
+            <li><a class="nav-item nav-link" href="">Logging</a></li>
+          </ul>
+        </li-->
+        <li class="nav-item router-link-active" routerLinkActive="active">
+          <a class="nav-item nav-link" [routerLink]="['/logging']">Logging</a>
+        </li>
+        <li class="nav-item router-link-active" routerLinkActive="active">
+          <a class="nav-item nav-link" [routerLink]="['/request']">Request</a>
+        </li>    
+        <li class="nav-item router-link-active" routerLinkActive="active">
+          <a class="nav-item nav-link" [routerLink]="['/createswtichorder']">Report</a>
+        </li>
+        <li class="nav-item router-link-active" routerLinkActive="active">
+          <a class="nav-item nav-link" href="">Administration</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" *ngIf="isAuth()">
+		<li class="router-link-active" routerLinkActive="active">
+		   <a  class="nav-item nav-link" (click)="onLogout()" style="cursor: pointer;">Logout</a>
+	    </li>
+      </ul>        
+  </div>
+</nav>

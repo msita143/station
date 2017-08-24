@@ -1,0 +1,61 @@
+<app-header></app-header>
+<div class="container-fluid">
+	<div class="row">
+		<div class="row loggingheader" >
+			<div class="col-md-11 ">		
+				<h2 class="centered text-center">Logging Dashboard</h2>
+			</div>
+			<div class="col-md-1">
+				<button class="btn btn-primary" type="submit" id="createLogging">Create New Log</button>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="search">
+				<form name="form" (ngSubmit)="f.form.valid && login(f.value)" #f="ngForm" novalidate>
+		             <div class="form-group row">
+		               	<div class="col-md-9" float="left">
+		                   <input type="text" class="form-control" id="userId" ngModel
+		                          name="search" required placeholder="Enter text">	                            
+		            	</div>           		                            
+	                    <div class="col-sm-2">
+	                       <select ngModel  #chooseSearch="ngModel" id="#chooseSearch" class="form-control"  name="[(ngModel)]"  >
+	                         <option *ngIf="chooseSearch.untouched || chooseSearch.invalid" value="" disabled selected>Choose search cretira</option>
+	                         <option *ngFor="let item of searchCretriaLsit" [value]="item">{{item}}</option>
+	                       </select>
+	                    </div>
+	                    <div class="col-sm-1">
+	        				<button class="btn btn-primary" type="submit" id="saerch">Search</button>
+	        			</div>
+		         	</div>
+		         </form>		         
+	         </div>
+		</div>
+		<div class="table-responsive loggingtable">    
+			<span><h3>List of current logs:</h3></span>      
+	  		<table class="table  table-bordered">
+	    		<thead>
+	      			<tr >
+	        			<th>Logging Title</th>
+	        			<th>Logging Type</th>
+	        			<th>Reported Dept</th>
+	        			<th>Reported By</th>
+	        			<th>Area</th>
+	        			<th>Station/Location</th>
+	        			<th>Assigned To</th>
+	        		</tr>
+	        	</thead>
+	        	<tbody>
+	        		<tr *ngFor="let loggingData of loggingDataList">
+	        			<td>{{loggingData.loggingtitle}}</td>
+	        			<td>{{loggingData.loggingtype}}</td>
+	        			<td>{{loggingData.reportedby}}</td>
+	        			<td>{{loggingData.reporteddatetime}}</td>
+	        			<td>{{loggingData.area}}</td>
+	        			<td>{{loggingData.locationstation}}</td>
+	        			<td>{{loggingData.assignedto}}</td>
+	        		</tr>
+	        	</tbody>
+	        </table>
+		</div>
+	</div>
+</div>

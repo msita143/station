@@ -1,0 +1,72 @@
+<app-header></app-header>
+<div class="container-fluid">
+	<div class="row">
+		<div class="row requestheader" >
+			<div class="col-md-10">		
+				<h2 class="centered text-center requesttext">Request Dashboard</h2>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-primary float-right" type="submit" (click)="createRequest()">Create New Request</button>
+			</div>
+		</div>
+		<div class="search">
+			<label>Search Criteria:</label>
+			<form name="form" (ngSubmit)="f.form.valid && login(f.value)" #f="ngForm" class="searchContainer" novalidate>
+					<div class="searchbox1">
+						<div class="form-group row divbox">
+							<label>Search by Id :</label>
+			                <input type="text" class="form-control" ngModel
+			                       name="search" required placeholder="Enter text">	                            
+						</div>
+						<div class="">
+	        				<button class="btn btn-primary" type="submit" id="saerch">Search</button>
+	        			</div>
+					</div>
+					<div class="searchbox2">
+			            <div class="form-group row divbox">       		                            
+		                	<label>Area :</label>
+		                    <select ngModel  class="form-control"  name="[(ngModel)]"  >
+		                       <option *ngFor="let item areaLsit" [value]="item">{{item}}</option>
+		                    </select>
+			         	</div>
+			         	<div class="form-group row divbox">       		                            
+		                	<label>Request Type :</label>
+		                    <select ngModel  #chooseSearch="ngModel" class="form-control"  name="[(ngModel)]"  >
+		                         <option *ngFor="let item of searchCretriaLsit" [value]="item">{{item}}</option>
+		                    </select>
+			         	</div>
+			         	<div class="col-sm-1">
+		        			<button class="btn btn-primary" type="submit" id="saerch">Search</button>
+		        		</div>
+			         </div>
+	         </form>		         
+         </div>
+		<div class="table-responsive requesttable">    
+			<span><h3>List of current requests:</h3></span>      
+	  		<table class="table table-bordered">
+	    		<thead>
+	      			<tr >
+	        			<th>Code</th>
+	        			<th>Type</th>
+	        			<th>Category</th>
+	        			<th>Requestor</th>
+	        			<th>Location</th>
+	        			<th>RC1</th>
+	        			<th>Creater</th>
+	        		</tr>
+	        	</thead>
+	        	<tbody>
+	        		<tr *ngFor="let request of requestList">
+	        			<td>{{request.requestcode}}</td>
+	        			<td>{{request.requesttype}}</td>
+	        			<td>{{request.category}}</td>
+	        			<td>{{request.requestor}}</td>
+	        			<td>{{request.location}}</td>
+	        			<td>{{request.rc1}}</td>
+	        			<td>{{request.creater}}</td>
+	        		</tr>
+	        	</tbody>
+	        </table>
+		</div>
+	</div>
+</div>

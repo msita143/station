@@ -1,0 +1,101 @@
+.so {
+	display: flex !important;
+}
+.soheader {
+	width:100%;
+	padding-top:10px;
+	margin-right:20px;
+	margin-left:5px;
+	padding-bottom:10px;
+	border-bottom: 1px solid #f6f2f2;
+}
+.soheadertext {
+	padding-left:150px;
+}
+
+.sodiv1 {
+	border-bottom: 1px solid #f6f2f2;
+	padding:20px 0 20px 30px;
+	background-color:#1e67c1;
+}
+.sodiv2 {
+	border-bottom: 1px solid #f6f2f2;
+	padding:20px 0 20px 50px;
+	background-color:#18b8e7;
+}
+.sotextdiv{
+	padding-left:5px;
+	padding-right:10px;
+    width: 205px;
+    background: whitesmoke;
+    height:40px;
+}
+
+.sotextdivNobrg{
+	padding-left:5px;
+	padding-right:10px;
+    width: 205px;
+}
+
+
+.width100{
+	width:100%;
+}
+.sosttextdiv{
+	padding-left:5px;
+	/*margin-right:120px;*/
+}
+
+.statinput{
+	width:100%;
+}
+
+.labelbox1{
+	width: 170px;
+    text-align: right;
+    margin-right: 9px;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #323c3c;
+    font-weight: bold;
+}
+
+.labelbox2{
+	width: 200px;
+    text-align: right;
+    margin-right: 4px;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #323c3c;
+    font-weight: bold;
+}
+
+.sotextlong{
+	padding-left:65px;
+}
+
+label {
+	padding-top:3px;
+}
+
+.buttonsavecancel {    
+    bottom:5px;
+    margin-top:auto;
+    padding:5px 5px;
+}
+
+
+.property-value {
+	line-height: 1.5;
+    font-size: 14px;
+}
+
+.property-name {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #323c3c;
+    font-weight: bold;
+   /* color: #959f9f; cool grey 40 */
+
+}
+

@@ -1,0 +1,62 @@
+.mainContent {
+	
+}
+.requestheader {
+	width:100%;
+	padding-top:10px;
+	margin-right:20px;
+	margin-left:5px;
+	padding-bottom:10px;
+	border-bottom: 1px solid #f6f2f2;
+}
+.requestheadertext {
+	padding-left:150px;
+}
+
+.request {
+	padding-top:20px;
+}
+
+.lreqborder {
+	border: 1px solid #f6f2f2;
+	padding:10px;
+	
+}
+
+.rreqborder {
+	border: 1px solid #f6f2f2;
+	padding-top:10px;
+}
+
+.datealign {
+	padding:30px 0 0 0;
+}
+
+.labeldatealign {
+	padding:28px 0 0 15px;
+}
+
+.radioalign {
+	padding:30px 0 0 30px;
+}
+	
+.rushalign{
+	padding-left: 40px;
+    margin-right: 30px;
+}
+
+.detailcheckbox{
+	padding: 1px 10px 1px 10px;
+}
+
+.checkboxpadding{
+	padding-left:10px;
+}
+
+.buttonsavecancel {
+    position:absolute;
+    bottom:5px;
+
+    margin:auto;
+    padding:5px 5px;
+}

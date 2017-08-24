@@ -1,0 +1,134 @@
+.requestheader {
+	width:100%;
+	padding-top:10px;
+	margin-left:5px;
+	margin-right:5px;
+	padding-bottom:10px;
+	border-bottom: 1px solid gray;
+}
+requesttext{
+	padding-left:30px;
+}
+
+.requesttable {
+	margin-top:10px;
+	padding:5px;
+}
+
+.search {
+	margin:10px;
+	border: 1px solid #c0c0c0;
+	width:100%;
+}
+
+.searchContainer {
+	display:flex;
+	flex-basis:100%;
+	height:180px;
+	align-content:center;	
+}
+
+.searchbox1{
+	width:25%;
+	border: 1px solid #c0c0c0;
+	justify-content: flex-end;
+}
+.searchdivbox1{
+	display:inline-flex;
+	justify-content: flex-start;
+}
+.searchdivbox2{
+	margin:15px 20px;
+}
+.searchbox2{
+	width:45%;
+	border-top: 1px solid #c0c0c0;
+	justify-content: flex-start;
+	
+}
+.tdNew{
+	background-color:blue;
+	color:white;
+}
+.tdRush{
+	background-color:Cyan;
+	color:black;
+}
+.tdCnclDapv{
+	background-color:Orange;
+	color:black;
+}
+.tdApprove{
+	background-color:Green;
+	color:black;
+}
+
+.tdAprovNotPicked {
+	background-color:Blue;
+	color:white;
+}
+
+.tdPastDue {
+	background-color:red;
+	color:black;
+}
+.tdInfoOnly {
+	background-color:yellow;
+	color:black;
+}
+.searchbuttonbox{
+	margin:10px;   
+	float:right;
+}
+
+.tableheader{
+	margin:5px;
+	width:100%;
+	display:flex;
+}
+.startdiv {
+	width:20%;
+	justify-content: flex-start;
+}
+.enddiv{
+	width:79%;
+	display:flex;
+	padding-left:5px;
+	max-heigth:20px;
+	justify-content: flex-end;
+}
+.searchbox3{
+	width:30%;
+	border-top: 1px solid #c0c0c0;
+	justify-content: flex-end;
+	
+}
+
+.highlight {
+	background:#c0c0c0;
+}
+
+.labelbox1{
+	width: 150px;
+    text-align: right;
+    margin-right: 4px;
+}
+.labelbox2{
+	width: 150px;
+    text-align: right;
+    margin-right: 4px;
+    margin-left:30px;
+}
+
+cal-group {
+	margin-botton:5px;
+}
+select {
+	width:200px;
+}
+.divbox{
+	margin:20px;
+}
+.inputbox {
+	width:300px;
+}

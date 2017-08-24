@@ -1,0 +1,12 @@
+ .jumbotron {
+     background-image: url(./app/images/Substation.jpg);
+     background-repeat: no-repeat;
+     background-position: center center;
+     -webkit-background-size: cover;
+     background-attachment: fixed;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
+     min-height: 900px;
+ }
+ 

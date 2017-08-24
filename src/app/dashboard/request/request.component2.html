@@ -1,0 +1,270 @@
+<app-header></app-header>
+<div class="container-fluid">
+	<!-- div class="row"-->
+		<div class="row requestheader" >
+			<div class="col-md-10 ">		
+				<h2 class="text-center requestheadertext">Request Dashboard</h2>
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-primary  float-right" type="submit" id="createRequest">Create New Request</button>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="request">
+				<form name="form" (ngSubmit)="f.form.valid && login(f.value)" #f="ngForm" novalidate>
+		             <div class="form-group row">
+		             	<label>Request Code : </label>
+		               	<div class="col-md-3">	               	   
+		                   <input type="text" class="form-control" id="reqCode" ngModel disabled
+		                          name="reqCode" required placeholder="Code will be generated">	                            
+		            	</div>           		       
+		            	<label>Request Category : </label>                     
+	                    <div class="col-md-3">		               	   
+		                   <select id="station" class="form-control"  value="{{requestCategoryCode}}"   >
+	                      		<option *ngFor="let requestCategory of requestCategoryList" [value]="requestCategory.codeshortname">
+										{{requestCategory.codeshortname}}
+								</option>
+	                       	</select>                            
+		            	</div> 
+		          		<label>Requested Type : </label>
+		            	<div class="col-md-3">
+		                   <select id="station" class="form-control"  value="{{requestTypeCode}}"   >
+	                      		<option *ngFor="let requestType of requestTypeList" [value]="requestType.codeshortname">
+										{{requestType.codeshortname}}
+								</option>
+	                       	</select>                               
+		            	</div> 
+		         	</div>
+		         </form>		         
+	         </div>
+		</div>
+		<div class="row col-md-12">
+			<div class="col-md-6 reqborder">
+			    <label><h4>Enter Equipment detail:</h4></label>
+				<form name="form" (ngSubmit)="t.form.valid && login(t.value)" #t="ngForm" novalidate>
+		             <div class="form-group row">	             	       
+		            	<label for="station" class="col-sm-2">Station :</label>              
+	                    <div class="col-md-5">		               	   
+		                   	<select id="station" class="form-control"  value="{{stationCode}}"  (change)="stationChanged($event.target.value)" >
+	                      		<option *ngFor="let station of stationList" [value]="station.code">{{station.code}}</option>
+	                       	</select>                            
+		            	</div> 
+		         	</div>
+		         	<div class="form-group row">
+                       <label for="equipType" class="col-sm-2">Equipment Type :</label>
+                       <div class="col-sm-5">
+                           <select id="equipTypeId" class="form-control"  (change)="equipTypeChanged($event.target.value)" value="{{equipmentType}}">
+	                         <option *ngFor="let equipType of equipmentTypeList" [value]="equipType.equipmentType">{{equipType.equipmentType}}</option>
+	                       </select> 
+                       </div>
+                    </div>
+                    <div class="form-group row">
+                       <label for="equip" class="col-sm-2">Equipment :</label>
+                       <div class="col-sm-5">
+                           <select ngModel multiple  #equip="ngModel" id="equip" class="form-control"  name="[(ngModel)]"  >
+	                         <option  *ngFor="let equip of equipmentList" [value]="equip.code">{{equip.code}}</option>
+	                       </select> 
+                       </div>
+                       <div>
+                       	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEquipmentModal">Add Equipment</button>
+                       	<div class="modal fade" id="addEquipmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Add new equipment</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+								<div class="container-fluid">
+									<div class="row">									 
+										<form>
+										  <div class="form-group row">
+											<label for="station" class="form-control-label">Station:</label>
+											<span>{{stationCode}}</span>
+										  
+											<label for="equipType" class="form-control-label">Equipment Type</label>
+											<span>{{equipmentType}}</span>
+										  </div>
+										  <div class="form-group row">
+										  	<label for="equipCode" class="form-control-label">Equipment Code:</label>
+										  	<input type="text" class="form-control" ngModel name="equipCode" 
+		                          				   required placeholder="Enter equipment code">	
+		                          		    <label for="equipName" class="form-control-label">Equipment Name:</label>
+										  	<input type="text" class="form-control" ngModel name="equipName" 
+		                          				   required placeholder="Enter equipment name">	
+										  </div>
+										</form>
+									</div>
+								</div>	
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						        <button type="button" class="btn btn-primary">Save</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+                       	
+                       
+                       <!-- button class="btn btn-primary" type="submit" id="addEquip">Add Equipment</button-->
+                       </div>
+                    </div>
+                    <div class="form-group row">
+                    	<label for="wrklocation" class="col-sm-2">Work Location : </label>
+		            	<div class="col-sm-5">
+		                   <input type="text" class="form-control" id="wrklocation" ngModel 
+		                          name="reqType" required placeholder="Enter work location">	                            
+		            	</div> 
+		         	</div>
+		         </form>
+		         <div class="table-responsive loggingtable">    
+					<span><h3>List of current Equipment:</h3></span>      
+			  		<table class="table  table-bordered">
+			    		<thead>
+			      			<tr >
+			        			<th>Station</th>
+			        			<th>Equipment</th>
+			        			<th>Equipment type</th>
+			        			<th>Reported By</th>
+			        			<th>Location</th>
+			        			<th>Voltage</th>
+			        			<th></th>
+			        		</tr>
+			        	</thead>
+			        	<tbody>
+			        		<tr *ngFor="let equip of equipmentList">
+			        			<td>{{stationCode}}</td>
+			        			<td>{{equip.code}}</td>
+			        			<td>{{equipmentType}}</td>
+			        			<td>{{equip.ownerCategory}}</td>
+			        			<td>{{equip.address}}</td>
+			        			<td>{{equip.highVoltage}}</td>
+			        		</tr>
+			        	</tbody>
+			        </table>	        
+				</div>
+			</div>
+			<div class="col-md-6 reqborder">
+			    <label><h4>Enter work detail:</h4></label>
+				<form name="form" (ngSubmit)="m.form.valid && login(m.value)" #m="ngForm" novalidate>
+					 <div class="form-group row">	           			           
+		            	<label for="wrkreason"  class="col-sm-1">Reason for work:</label>
+  						<textarea class="col-sm-4" rows="3" id="wrkreason"></textarea>
+  						<div class="col-sm-4 rushalign">  		
+							<div class="form-check">
+							  <label class="form-check-label">
+							    <input class="form-check-input" type="checkbox" value="">
+							    Rush Request
+							  </label>
+							</div>
+							<div class="col-sm-12">          
+  								<textarea class="form-control" rows="3" id="rush" placeholder="Enter reason of rush"></textarea>
+  							</div>
+  						</div>
+  					    <div class="radio col-md-2">
+  					      <label>Select Department</label>
+						  <label><input type="radio" name="optradio">Transmission</label>
+						  <label><input type="radio" name="optradio">Substation</label>
+						</div>
+  					</div>
+		         	<div class="form-group row">	
+		         		<div class="col-sm-5 row">
+			         		<label class="col-sm-2 labeldatealign">Start time :</label>
+							<div class="form-group col-sm-6">
+							    <div class="input-group datealign">
+							      <input class="form-control" placeholder="yyyy-mm-dd"
+							             name="sdp" [(ngModel)]="model" ngbDatepicker #ds="ngbDatepicker">
+							      <div class="input-group-addon" (click)="ds.toggle()" >
+							        <img src="./app/images/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+							      </div>					      
+							    </div>
+							</div>
+							<div class="form-group col-sm-4">
+							      <ngb-timepicker [(ngModel)]="stime"name="stime"></ngb-timepicker>					      					      
+							</div>
+						</div>
+						<div class="col-sm-1">
+						</div>
+						<div class="col-sm-5 row">
+			         	    <label class=" col-sm-2 labeldatealign">End time :</label>	
+							<div class="form-group col-sm-6">
+							    <div class="input-group datealign">
+							      <input class="form-control" placeholder="yyyy-mm-dd"
+							             name="edp" [(ngModel)]="model" ngbDatepicker #de="ngbDatepicker">
+							      <div class="input-group-addon" (click)="de.toggle()" >
+							        <img src="./app/images/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+							      </div>					      
+							    </div>
+							</div>
+							<div class="form-group col-sm-4">
+							      <!-- ngb-timepicker [(ngModel)]="time" [seconds]="seconds" name="time"></ngb-timepicker-->		
+							      <ngb-timepicker [(ngModel)]="etime" name="etime"></ngb-timepicker>					      					      
+							</div>
+						</div>
+		         	</div> 
+		         	<div class="form-group row">
+		         		<label class="labeldatealign">Cleanup Time :</label>
+						<div class="form-group col-sm-3">
+						      <ngb-timepicker [(ngModel)]="stime"name="stime"></ngb-timepicker>					      					      
+						</div>
+		         	</div>		         					
+		         	<div class="form-group checkboxpadding row">
+		         		<div class="checkbox detailcheckbox">
+						  <label>
+						    <input type="checkbox" value="">
+						    Switching Only
+						  </label>
+						</div>
+						<div class="checkbox detailcheckbox">
+							<label>
+							    <input type="checkbox" value="">
+							    Test Clearance
+							</label>
+						</div>
+						<div class="checkbox detailcheckbox">
+							<label>
+							    <input type="checkbox" value="">
+							    Ground Switch Needed
+							</label>
+						</div>
+						<div class="checkbox detailcheckbox">
+							<label>
+							    <input type="checkbox" value="">
+							    Construction Clearance
+							</label>
+						</div>
+						<div class="checkbox detailcheckbox">
+							<label>
+							    <input type="checkbox" value="">
+							    Jurisdiction Clearance
+							</label>
+						</div>
+						<div class="checkbox detailcheckbox">
+							<label>
+							    <input type="checkbox" value="">
+							    Boundry Clearance
+							</label>
+						</div>
+		         	</div>
+		         	<div class="row">
+		         		<div class="col-md-10">
+		         		</div>
+		         		<div class="col-md-2">
+							<button class="btn btn-primary pull-right" type="submit" id="holder">Holder</button>
+						</div>
+					</div>
+				</form>					
+			</div>
+		</div>
+		<div class="footer col-md-12 row buttonsavecancel">
+			<div class="col-md-11 ">
+				<button class="btn" type="submit" id="cancel">Cancel</button>
+			</div>
+			<div class="col-md-1">
+				<button class="btn btn-primary pull-right" type="submit" id="save">Save</button>
+			</div>
+		</div>
+	<!-- /div-->
+</div>
