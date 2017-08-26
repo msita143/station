@@ -48,6 +48,7 @@ export class RequestComponent implements OnInit {
     edp:any;
     startdate:any;
     enddate:any;
+    codeshortname:string;
     requestCategoryCode:string;
     requestTypeCode:string;
     stationCode:string; 
@@ -204,5 +205,9 @@ export class RequestComponent implements OnInit {
    
    createSwtichOrder() {
        this.router.navigate(['createswtichorder',{'requestid':this.selectedRequestId,'stationid':this.selectedStationId}]);
+   }
+   
+   createPermit(){
+     
    }
 }

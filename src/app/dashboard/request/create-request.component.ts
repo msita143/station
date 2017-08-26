@@ -39,12 +39,15 @@ export class CreateRequestComponent implements OnInit {
     loggedInUser:User;
     
     edp:any;
+    sdp:any;
     startdate:any;
     enddate:any;
     requestCategoryCode:string;
     requestTypeCode:string;
     stationCode:string; 
     equipmentType:string;
+    rushRequest:string;
+    rushReason:string;
     stationId:number;
     constructor(private requestService:RequestService, private stationService:StationService,  
                 private equipmentService:EquipmentService,private authService:AuthenticationService,

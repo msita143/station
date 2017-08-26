@@ -45,7 +45,7 @@
 	            	</div> 
 	            	<label for="wrklocation" class="col-sm-2">Work Location : </label>
 	            	<div class="col-sm-4">
-	                   <input type="text" class="form-control" id="wrklocation"  required  [(ngModel)]="wrkLocation"
+	                   <input type="text" class="form-control" id="wrklocation"  required 
 	                          name="wrkLocation" placeholder="Enter work location">	                            
 	            	</div> 
 	         	</div>
@@ -99,7 +99,7 @@
 					<div class="col-sm-4 rushalign">  		
 						<div class="form-check">
 							<label class="form-check-label">
-							    <input #rush class="form-check-input" type="checkbox" value="" [(ngModel)]="rushRequest" name="rushRequest" >
+							    <input #rush class="form-check-input" type="checkbox" value="" name="rushRequest" >
 							    Rush Request
 							</label>
 					</div>
@@ -121,7 +121,7 @@
 						      <input class="form-control" placeholder="yyyy-mm-dd" required (ngModelChange)="startDatechange($event)"
 						             name="sdp" [(ngModel)]="sdp" ngbDatepicker #ds="ngbDatepicker">
 						      <div class="input-group-addon" (click)="ds.toggle()" >
-						        <img src="./app/images/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+						        <img src="../../images/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
 						      </div>					      
 						    </div>
 						</div>
@@ -138,7 +138,7 @@
 						      <input class="form-control" placeholder="yyyy-mm-dd" name="edp" (ngModelChange)="endDatechange($event)"
 						             [(ngModel)]="edp" ngbDatepicker #de="ngbDatepicker">
 						      <div class="input-group-addon" (click)="de.toggle()" >
-						        <img src="./app/images/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+						        <img src="../../images/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
 						      </div>					      
 						    </div>
 						</div>
@@ -157,67 +157,67 @@
 				<div class="form-group  row">
 	         		<div class="checkbox detailcheckbox">
 					  <label>
-					    <input type="checkbox" value="" [(ngModel)]="switchOnly" name="switchOnly" >
+					    <input type="checkbox" value=""  name="switchOnly" >
 					    Switching Only
 					  </label>
 					</div>
 					<div class="checkbox detailcheckbox">
 						<label>
-						    <input type="checkbox" value=""  [(ngModel)]="testClearance"  name="testClearance" >
+						    <input type="checkbox" value="" name="testClearance" >
 						    Test Clearance
 						</label>
 					</div>
 					<div class="checkbox detailcheckbox">
 						<label>
-						    <input type="checkbox" value=""  [(ngModel)]="groundSwitchNeeded"  name="groundSwitchNeeded">
+						    <input type="checkbox" value=""   name="groundSwitchNeeded">
 						    Ground Switch Needed
 						</label>
 					</div>
 					<div class="checkbox detailcheckbox">
 						<label>
-						    <input type="checkbox" value=""  [(ngModel)]="groundSwitchNeeded"  name="commonEquipmant">
+						    <input type="checkbox" value=""  name="commonEquipmant">
 						    Common Equipment
 						</label>
 					</div>
 					<div class="checkbox detailcheckbox">
 						<label>
-						    <input type="checkbox" value=""  [(ngModel)]="constructionClearance" name="constructionClearance">
+						    <input type="checkbox" value=""  name="constructionClearance">
 						    Construction Clearance
 						</label>
 					</div>
 					<div class="checkbox detailcheckbox">
 						<label>
-						    <input type="checkbox" value=""  [(ngModel)]="jurisdictionClearance" name="jurisdictionClearance">
+						    <input type="checkbox" value="" name="jurisdictionClearance">
 						    Jurisdiction Clearance
 						</label>
 					</div>
 					<div class="checkbox detailcheckbox">
 						<label>
-						    <input type="checkbox" value=""  [(ngModel)]="boundaryClearance" name="boundaryClearance">
+						    <input type="checkbox" value="" name="boundaryClearance">
 						    Boundary Clearance
 						</label>
 					</div>
 					<div class="checkbox detailcheckbox">
 						<label>
-						    <input type="checkbox" value=""  [(ngModel)]="permitNeeded" name="permitNeeded">
+						    <input type="checkbox" value=""  name="permitNeeded">
 						    Permit Needed
 						</label>
 					</div>
 					<div class="checkbox detailcheckbox">
 						<label>
-						    <input type="checkbox" value=""  [(ngModel)]="requestOnly" name="requestOnly">
+						    <input type="checkbox" value="" name="requestOnly">
 						    Request Only
 						</label>
 					</div>
 					<div class="checkbox detailcheckbox">
 						<label>
-						    <input type="checkbox" value=""  [(ngModel)]="outageScheduleMasterOpf" name="outageScheduleMasterOpf">
+						    <input type="checkbox" value="" name="outageScheduleMasterOpf">
 						    Outage Schedule Master Opf
 						</label>
 					</div>
 					<div class="checkbox detailcheckbox">
 						<label>
-						    <input type="checkbox" value=""  [(ngModel)]="referenceDrawingInt" name="referenceDrawingInt">
+						    <input type="checkbox" value="" name="referenceDrawingInt">
 						    Reference Drawing
 						</label>
 					</div>

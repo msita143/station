@@ -91,7 +91,7 @@
              	<label class="labelbox1">Station : </label>
                	<div class="sotextdivNobrg col-md-2">	               	   
                 	<select class="form-control" ngModel name="station" value="{{stationCode}}">	
-                   		<option *ngFor="let station of stationList" [value]="station.id">
+                   		<option *ngFor="let station of stationList" [value]="station.stationid">
 							{{station.code}}
 						</option>
                    	</select>                            
@@ -135,14 +135,14 @@
 			        		</tr>
 			        	</thead>
 			        	<tbody>
-			        		<tr *ngFor="let equip of selectedEquipmentList">
+			        		<!-- >tr *ngFor="let equip of selectedEquipmentList">
 			        			<td>{{stationCode}}</td>
 			        			<td>{{equip.code}}</td>
 			        			<td>{{equipmentType}}</td>
 			        			<td>{{equip.address}}</td>
 			        			<td>{{equip.lowVoltage}}</td>
 			        			
-			        		</tr>
+			        		</tr-->
 			        	</tbody>
 			        </table>	        
 			</div>
